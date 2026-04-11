@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/coin-flip-sdk?color=blueviolet) ![Stacks Mainnet](https://img.shields.io/badge/Stacks-Mainnet-blueviolet) ![license](https://img.shields.io/badge/license-MIT-blue)
+[![npm](https://img.shields.io/npm/v/coin-flip-sdk?color=blueviolet)](https://www.npmjs.com/package/coin-flip-sdk) ![Stacks Mainnet](https://img.shields.io/badge/Stacks-Mainnet-blueviolet) ![license](https://img.shields.io/badge/license-MIT-blue)
 
 # coin-flip-sdk
 
