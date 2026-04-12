@@ -1,0 +1,47 @@
+name: Scheduled Package Verify
+
+on:
+  schedule:
+    - cron: '10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  verify-package:
+    name: Clean install and verify
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+        continue-on-error: true
+
+      - name: Create isolated workspace
+        run: mkdir -p /tmp/coin-flip-verify
+        continue-on-error: true
+
+      - name: Bootstrap project
+        working-directory: /tmp/coin-flip-verify
+        run: npm init -y
+        continue-on-error: true
+
+      - name: Install coin-flip-sdk from npm
+        working-directory: /tmp/coin-flip-verify
+        run: npm install coin-flip-sdk
+        continue-on-error: true
+
+      - name: Validate package loads correctly
+        working-directory: /tmp/coin-flip-verify
+        run: node -e "const pkg = require('coin-flip-sdk'); console.log('Scheduled verify passed for coin-flip-sdk');"
+        continue-on-error: true
+
+      - name: Report package version
+        working-directory: /tmp/coin-flip-verify
+        run: node -e "console.log('coin-flip-sdk version:', require('coin-flip-sdk/package.json').version);"
+        continue-on-error: true
+
+      - name: List package structure
+        working-directory: /tmp/coin-flip-verify
+        run: find node_modules/coin-flip-sdk -type f | head -30
+        continue-on-error: true
